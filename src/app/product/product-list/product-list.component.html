@@ -1,0 +1,36 @@
+<div class="container" style="margin-top: 5px">
+  <div class="row">
+    <div class="col-md-3">
+      <h1>Total products: {{listProducts.length}}</h1>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+      <a class="btn btn-primary" style="margin-top: 5px" routerLink="/products/create">Add new product</a>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Product Name</th>
+    <th scope="col">Price</th>
+    <th scope="col" colspan="2" style="text-align: center">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let product of listProducts; index as i">
+    <tr>
+      <th>{{i+1}}</th>
+      <td><a [routerLink]="['/products/details', product.id]">{{product.name}}</a></td>
+      <td>{{product.price}}</td>
+      <td style="text-align: center">
+        <a class="btn btn-success" [routerLink]="['/products/edit', product.id]">Update</a>
+      </td>
+      <td style="text-align: center">
+        <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

@@ -1,0 +1,44 @@
+<style>
+  td, th {
+    border: 0;
+  }
+</style>
+<div class="container" style="margin-top: 5px; box-shadow: 5px 5px 10px 10px orangered">
+  <div class="row">
+    <div class="col-md-3">
+      <h1>Product Details</h1>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3">
+      <a class="btn btn-primary" routerLink="/products">Product List</a>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <tbody>
+      <tr>
+        <td>Product Name:</td>
+        <td>{{product.name}}</td>
+      </tr>
+      <tr>
+        <td>Product Price:</td>
+        <td>{{product.price}}</td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{product.description}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-md-3 offset-3">
+      <a class="btn btn-success" [routerLink]="['/products/edit', product.id]">Update</a>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+
