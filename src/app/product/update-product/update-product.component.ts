@@ -69,7 +69,7 @@ export class UpdateProductComponent implements OnInit {
       price: this.productForm.value.price,
       description: this.productForm.value.description,
       category: {
-        id: this.productForm.value.categoryId,
+        id: this.productForm.value.category,
       }
     }
     // pass the idToUpdate (in view, we call this method with idToUpdate)

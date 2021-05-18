@@ -27,8 +27,8 @@
       </div>
       <div class="mb-3">
         <label for="categories" class="form-label">Product Category</label><br>
-        <select name="categoryId" id="categories" formControlName="category" class="form-control">
-          <option *ngFor="let category of listCategories" [ngValue]="category.id">{{category.name}}</option>
+        <select name="categoryId" id="categories" formControlName="category">
+          <option *ngFor="let category of listCategories" [value]="category.id">{{category.name}}</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Update</button>
