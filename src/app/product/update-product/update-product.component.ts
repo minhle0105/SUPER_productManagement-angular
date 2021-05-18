@@ -3,6 +3,7 @@ import {Product} from '../../model/product';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../../service/product.service';
 import {ActivatedRoute} from '@angular/router';
+import {CategoryService} from '../../service/category.service';
 
 @Component({
   selector: 'app-update-product',
@@ -12,14 +13,18 @@ import {ActivatedRoute} from '@angular/router';
 export class UpdateProductComponent implements OnInit {
   product: Product = {};
   idToUpdate: number = -1;
+  listCategories: string[] = [];
+
   productForm = new FormGroup({
     name: new FormControl(),
     price: new FormControl(),
-    description: new FormControl()
+    description: new FormControl(),
+    category: new FormControl(),
   })
 
   constructor(private productService: ProductService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private categoryService: CategoryService) {
     // get the current url link
     this.activatedRoute.paramMap.subscribe(paramMap => {
       // get the 'id' from current URL, assign the value to idToUpdate
@@ -31,6 +36,15 @@ export class UpdateProductComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.getAllCategories();
+  }
+
+  getAllCategories() {
+    this.categoryService.getAllCategories().subscribe(categories => {
+      for (let i = 0; i < categories.length; i++) {
+        this.listCategories[i] = categories[i].name;
+      }
+    })
   }
 
   get id() {
@@ -42,7 +56,8 @@ export class UpdateProductComponent implements OnInit {
       this.productForm = new FormGroup({
         name: new FormControl(thisProduct.name),
         price: new FormControl(thisProduct.price),
-        description: new FormControl(thisProduct.description)
+        description: new FormControl(thisProduct.description),
+        category: new FormControl(thisProduct.category)
       })
     })
   };

@@ -25,6 +25,12 @@
         <label for="productDescription" class="form-label">Product Description</label>
         <textarea type="text" formControlName="description" name="description" class="form-control" id="productDescription"></textarea>
       </div>
+      <div class="mb-3">
+        <label for="categories" class="form-label">Product Category</label><br>
+        <select name="categories" id="categories" [(ngModel)]="product.category">
+          <option *ngFor="let category of listCategories" [value]="category">{{category}}</option>
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary">Update</button>
     </form>
   </div>

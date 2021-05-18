@@ -15,6 +15,7 @@
     <th scope="col">#</th>
     <th scope="col">Product Name</th>
     <th scope="col">Price</th>
+    <th scope="col">Category</th>
     <th scope="col" colspan="2" style="text-align: center">Action</th>
   </tr>
   </thead>
@@ -24,6 +25,7 @@
       <th>{{i+1}}</th>
       <td><a [routerLink]="['/products/details', product.id]">{{product.name}}</a></td>
       <td>{{product.price}}</td>
+      <td>{{product.category}}</td>
       <td style="text-align: center">
         <a class="btn btn-success" [routerLink]="['/products/edit', product.id]">Update</a>
       </td>
