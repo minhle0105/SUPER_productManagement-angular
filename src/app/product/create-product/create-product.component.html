@@ -24,8 +24,8 @@
       </div>
       <div class="mb-3">
         <label for="categories" class="form-label">Product Description</label><br>
-        <select name="categories" id="categories" [(ngModel)]="product.category">
-          <option *ngFor="let category of listCategories" [value]="category">{{category}}</option>
+        <select name="categoryId" id="categories" [(ngModel)]="product.category" class="form-control">
+          <option *ngFor="let category of listCategories" [ngValue]="category.id">{{category.name}}</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>

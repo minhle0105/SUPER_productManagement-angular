@@ -12,7 +12,7 @@ import {Category} from '../../model/category';
 })
 export class CreateProductComponent implements OnInit {
   product: Product = {};
-  listCategories: string[] = [];
+  listCategories: Category[] = [];
 
   constructor(private productService: ProductService,
               private categoryService: CategoryService) { }
@@ -24,17 +24,22 @@ export class CreateProductComponent implements OnInit {
 
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(categories => {
-      for (let i = 0; i < categories.length; i++) {
-        this.listCategories[i] = categories[i].name;
-      }
+      this.listCategories = categories;
     })
   }
 
   addNewProduct(form: NgForm) {
-    let newProduct = form.value;
+    let newProduct: Product = {
+      name: form.value.name,
+      price: form.value.price,
+      description: form.value.description,
+      category: {
+        id: form.value.categoryId,
+      }
+    };
     this.productService.createNewProduct(newProduct).subscribe(() => {
       alert("Product is successfully saved");
-      this.product = {};
+      form.reset();
     }, error => {
       alert("Cannot add product");
       console.log(error);
