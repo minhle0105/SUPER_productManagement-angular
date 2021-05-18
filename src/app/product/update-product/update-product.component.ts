@@ -4,6 +4,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../../service/product.service';
 import {ActivatedRoute} from '@angular/router';
 import {CategoryService} from '../../service/category.service';
+import {Category} from '../../model/category';
 
 @Component({
   selector: 'app-update-product',
@@ -13,7 +14,7 @@ import {CategoryService} from '../../service/category.service';
 export class UpdateProductComponent implements OnInit {
   product: Product = {};
   idToUpdate: number = -1;
-  listCategories: string[] = [];
+  listCategories: Category[] = [];
 
   productForm = new FormGroup({
     name: new FormControl(),
@@ -41,9 +42,7 @@ export class UpdateProductComponent implements OnInit {
 
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(categories => {
-      for (let i = 0; i < categories.length; i++) {
-        this.listCategories[i] = categories[i].name;
-      }
+      this.listCategories = categories;
     })
   }
 
@@ -64,7 +63,15 @@ export class UpdateProductComponent implements OnInit {
 
   updateProductInfo(id: number) {
     // get the new product info from the form
-    let newProduct = this.productForm.value;
+    // let newProduct = this.productForm.value;
+    let newProduct: Product = {
+      name: this.productForm.value.name,
+      price: this.productForm.value.price,
+      description: this.productForm.value.description,
+      category: {
+        id: this.productForm.value.categoryId,
+      }
+    }
     // pass the idToUpdate (in view, we call this method with idToUpdate)
     this.productService.updateProduct(id, newProduct).subscribe(() => {
       alert("Product is successfully updated");
